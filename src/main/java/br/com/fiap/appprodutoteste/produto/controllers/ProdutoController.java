@@ -49,6 +49,7 @@ public class ProdutoController {
 	public String salvar(ProdutoDto produto ) {
 		Produto produtoEntity = modelMapper.map(produto, Produto.class);
 		
+		//a repository faz a interação com o banco de dados
 		produtoRepository.save(produtoEntity);
 		
 		return "redirect:/produtos";
