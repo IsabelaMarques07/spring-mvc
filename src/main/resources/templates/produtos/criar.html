@@ -14,37 +14,46 @@
 </head>
 <body>
 	<div class="container mt-3">
-		<form action="/produtos" method="POST">
+		<form th:object="${produtoDto}" action="/produtos" method="POST">
 			<div class="row">
 				<div class="col-md-6">
 					<div class="input-group mb-3 input-group-sm">
-						<span class="input-group-text">Nome</span> <input type="text"
-							name="nome" class="form-control">
+						<span class="input-group-text">Nome</span> 
+						<input th:errorclass="is-invalid" type="text" th:field="*{nome}" class="form-control">
+						<div class="invalid-feedback" th:errors="*{nome}"></div>
 					</div>
+					
 				</div>
 				<div class="col-md-6">
 					<div class="input-group mb-3 input-group-sm">
-						<span class="input-group-text">Quantidade</span> <input type="text"
-							name="quantidade" class="form-control">
+						<span class="input-group-text">Quantidade</span> 
+						<input th:errorclass="is-invalid" th:field="*{quantidade}" type="text"  class="form-control">
+						<div class="invalid-feedback" th:errors="*{quantidade}"></div>
 					</div>
+					
 				</div>
 			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<div class="input-group mb-3 input-group-sm">
-						<span class="input-group-text">Valor</span> <input type="text"
-							name="valor" class="form-control">
-					</div>
-				</div>
-				
-			</div>
-			
-				 
 
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group mb-3 input-group-sm">
+						<span class="input-group-text">Valor</span> 
+						<input th:errorclass="is-invalid" type="text" th:field="*{valor}" id="valor" onblur="tratarValor(this)" class="form-control">
+						<div class="invalid-feedback" th:errors="*{valor}"></div>
+					</div>
+					
+				</div>
+
+			</div>
 			<input class="btn btn-success" type="submit" value="Salvar" />
 		</form>
 
 	</div>
 </body>
 </html>
+
+<script>
+	function tratarValor(campo){
+		campo.value = campo.value.replace(",", ".");
+}
+</script>

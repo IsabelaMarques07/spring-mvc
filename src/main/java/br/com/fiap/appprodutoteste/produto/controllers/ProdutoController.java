@@ -4,9 +4,12 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,20 +42,29 @@ public class ProdutoController {
 		return modelView;
 	}
 	
+
 	@GetMapping("/produtos/criar")
-	public ModelAndView criar() {
+	public ModelAndView criar(ProdutoDto produto) {
 		ModelAndView modelView = new ModelAndView("produtos/criar");
 		return modelView;
 	}
 	
+	//quando submeter, valida o objeto(dto) e retorna os erros(binding)
 	@PostMapping("produtos")
-	public String salvar(ProdutoDto produto ) {
+	public ModelAndView salvar(@Valid ProdutoDto produto, BindingResult bindingResult ) {
+		
+		if(bindingResult.hasErrors()) {
+			System.out.println("Temos erros!");
+			return new ModelAndView("/produtos/criar");
+		}
+		
+		
 		Produto produtoEntity = modelMapper.map(produto, Produto.class);
 		
 		//a repository faz a interação com o banco de dados
 		produtoRepository.save(produtoEntity);
 		
-		return "redirect:/produtos";
+		return new ModelAndView ("redirect:/produtos");
 			
 	}
 	

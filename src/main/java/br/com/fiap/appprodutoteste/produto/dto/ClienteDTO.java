@@ -1,8 +1,16 @@
 package br.com.fiap.appprodutoteste.produto.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ClienteDTO {
 	private Long Id; 
+	@NotBlank
+	@NotNull
 	private String Nome; 
+	
+	@NotBlank
+	@NotNull
 	private String Documento; 
 	private String Endereco;
 
@@ -12,6 +20,7 @@ public class ClienteDTO {
 	public void setId(Long id) {
 		Id = id;
 	}
+
 	public String getNome() {
 		return Nome;
 	}

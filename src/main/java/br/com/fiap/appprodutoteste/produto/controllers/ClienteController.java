@@ -2,9 +2,12 @@ package br.com.fiap.appprodutoteste.produto.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,16 +38,41 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/clientes/criar")
-	public ModelAndView criar() {
+	public ModelAndView criar(ClienteDTO cliente) {
 		ModelAndView model = new ModelAndView("clientes/criar");
 		return model;
 	}
 	
 	@PostMapping("clientes")
-	public String salvar(ClienteDTO cliente) {
+	public ModelAndView salvar(@Valid ClienteDTO cliente, BindingResult bindingResult) {
+		
+		if(bindingResult.hasErrors()) {
+			System.out.println("Temos erros!");
+			return new ModelAndView("/clientes/criar");
+		}
+		
+		
 		Cliente clienteEntity = modelMapper.map(cliente, Cliente.class);
 		clienteRepository.save(clienteEntity);
-		return "redirect:/clientes";
+		return new ModelAndView("redirect:/clientes");
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
