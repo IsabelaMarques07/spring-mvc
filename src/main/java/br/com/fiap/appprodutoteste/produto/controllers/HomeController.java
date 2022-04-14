@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 	
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String home(HttpServletRequest request) {
-		request.setAttribute("nomeUsuario", "Thiago Souza Xavier");
+		request.setAttribute("nomeUsuario", "Isabela Marques Dias");
 		
 		return "home";
 	}

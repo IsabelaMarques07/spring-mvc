@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<header th:replace="~{cabecalho :: head('Detalhe do produto')}"></header>
+<body>
+	<nav th:replace="~{menu :: nav}"></nav>
+	<div class="container">
+	<h3 class="text-center">Visualizar produto</h3>
+	<form th:object="${produtoDto}" action="/produtos" method="POST">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-group mb-3 input-group-sm">
+					<span class="input-group-text">Nome</span> 
+					<input th:placeholder="${produto.nome}" readonly type="text" class="form-control">
+				</div>
+
+			</div>
+			<div class="col-md-6">
+				<div class="input-group mb-3 input-group-sm">
+					<span class="input-group-text">Quantidade</span> 
+						<input th:placeholder="${produto.quantidade}" readonly type="text" class="form-control">
+
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="input-group mb-3 input-group-sm">
+					<span class="input-group-text">Valor</span> 
+					<input th:placeholder="${produto.valor}" readonly type="text" class="form-control">
+
+				</div>
+
+			</div>
+
+		</div>
+	</form>
+	<div class="row">
+		<div class="col-md-12">
+			<a href="/produtos">Voltar</a>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
